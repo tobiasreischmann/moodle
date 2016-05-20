@@ -254,7 +254,6 @@ class core_course_renderer extends plugin_renderer_base {
      * @return string The composed HTML for the module
      */
     protected function course_modchooser_module_types($modules) {
-        var_dump($modules);
         $return = '';
         foreach ($modules as $module) {
             if (!isset($module->types)) {

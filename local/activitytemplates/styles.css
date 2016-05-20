@@ -1,0 +1,22 @@
+.jschooser .choosercontainer #chooseform .typesummary {
+    height: 175px;
+}
+
+.jschooser .choosercontainer #chooseform .selected .local_activitytemplates_modchooser_rightpane {
+    display: block;
+}
+
+.jschooser .choosercontainer #chooseform .local_activitytemplates_modchooser_rightpane {
+    display: none;
+    position: absolute;
+    top: 225px;
+    right: 0;
+    bottom: 0;
+    left: 20.3em;
+    margin: 0;
+    padding: 0em 1.6em 1.6em 1.6em;
+    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    line-height: 2em;
+}
