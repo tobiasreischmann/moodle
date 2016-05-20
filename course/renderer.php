@@ -254,6 +254,7 @@ class core_course_renderer extends plugin_renderer_base {
      * @return string The composed HTML for the module
      */
     protected function course_modchooser_module_types($modules) {
+        var_dump($modules);
         $return = '';
         foreach ($modules as $module) {
             if (!isset($module->types)) {
@@ -313,6 +314,7 @@ class core_course_renderer extends plugin_renderer_base {
         $module->help = format_text($module->help, FORMAT_MARKDOWN, $options);
         $output .= html_writer::tag('span', $module->help, array('class' => 'typesummary'));
         $output .= html_writer::end_tag('label');
+        $output .= local_activitytemplates_modchooser_templates($module);
         $output .= html_writer::end_tag('div');
 
         return $output;
