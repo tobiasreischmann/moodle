@@ -25,3 +25,5 @@
 $string['general_config_header'] = 'Template Course Settings';
 $string['template_courses'] = 'Template Course';
 $string['template_courses_desc'] = 'Comma separated list of course ids';
+$string['extend_description'] = "Extend description";
+$string['heading_templates'] = "Activity templates";

@@ -14,15 +14,17 @@ function local_activitytemplates_modchooser_templates($module) {
     $templates = "aaa";
 
     $templates = html_writer::start_div('local_activitytemplates_modchooser_extend');
-    $templates .= "@Extend description";
+    $templates .= get_string("extend_description","local_activitytemplates");
     $templates .= html_writer::end_div();
 
     $templates .= html_writer::start_div('local_activitytemplates_modchooser_head');
-    $templates .= "@Templates";
+    $templates .= get_string("heading_templates","local_activitytemplates");
     $templates .= html_writer::end_div();
 
     $templates .= html_writer::start_div('local_activitytemplates_modchooser_body');
+    // TODO UL LI
     $templates .= "@Template1";
+    $templates .= "@Template2";
     $templates .= html_writer::end_div();
 
     $output = html_writer::span($templates, 'local_activitytemplates_modchooser_rightpane');
