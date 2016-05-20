@@ -13,21 +13,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version details
+ * Services for the avtivity templates.
+ *
  * @package local_activitytemplates
- * @category  local
- * @copyright 2016 Tobias Reischmann and Jan Dageförde, University of Münster
+ * @category   services
+ * @copyright 2016 WWU Münster
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2016052005;     // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2015111000;     // Requires this Moodle version.
-$plugin->component = 'local_activitytemplates'; // Full name of the plugin (used for diagnostics).
-$plugin->release = 'v3.0-r1';
-$plugin->maturity = MATURITY_BETA;
-
-                                           
+$functions = array(
+    'local_activitytemplates_get_templates' => array(
+        'classname' => 'local_activitytemplates_template_provider',
+        'methodname' => 'get_templates_for_activity', // Implement this function into the above class.
+        'classpath'   => 'local/activitytemplates/externallib.php',
+        'description' => 'Service to provide templates for a activity type',
+        'type' => 'read', // The value is 'write' if your function does any database change, otherwise it is 'read'.
+//        'capabilities' => 'moodle/course:managegroups', TODO: Is there a moodle/course:addactivity?
+        'ajax' => true,
+    )
+);

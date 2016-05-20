@@ -296,7 +296,8 @@ class core_course_renderer extends plugin_renderer_base {
             // Add help if found
             $module->help = get_string('nohelpforactivityorresource', 'moodle');
         }
-
+        global $PAGE;
+        $PAGE->requires->js_call_amd('local_activitytemplates/load_templates', 'initialise', array($COURSE->id));
         // Format the help text using markdown with the following options
         $options = new stdClass();
         $options->trusted = false;
@@ -309,7 +310,6 @@ class core_course_renderer extends plugin_renderer_base {
         $module->help = format_text($module->help, FORMAT_MARKDOWN, $options);
         $output .= html_writer::tag('span', $module->help, array('class' => 'typesummary'));
         $output .= html_writer::end_tag('label');
-        $output .= local_activitytemplates_modchooser_templates($module);
         $output .= html_writer::end_tag('div');
 
         return $output;
