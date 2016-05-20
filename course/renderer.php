@@ -202,12 +202,8 @@ class core_course_renderer extends plugin_renderer_base {
 
         // Put everything into one tag 'options'
         $formcontent .= html_writer::start_tag('div', array('class' => 'options'));
-        $formcontent .= html_writer::start_tag('div', array('class' => 'additional_information'));
         $formcontent .= html_writer::tag('div', get_string('selectmoduletoviewhelp', 'moodle'),
-            array('class' => 'instruction'));
-        $formcontent .= html_writer::tag('div', get_string('selectmoduletoviewhelp', 'moodle'),
-            array('class' => 'templates'));
-        $formcontent .= html_writer::end_tag('div');
+                array('class' => 'instruction'));
         // Put all options into one tag 'alloptions' to allow us to handle scrolling
         $formcontent .= html_writer::start_tag('div', array('class' => 'alloptions'));
 
