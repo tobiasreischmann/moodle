@@ -48,6 +48,7 @@ class local_activitytemplates_template_provider extends external_api{
     public static function get_templates_for_activity($activitytype) {
         global $DB, $PAGE, $CFG;
         $params = self::validate_parameters(self::get_templates_for_activity_parameters(), array('id' => $activitytype));
+        //require_capability('moodle/course:manageactivities', context_course::instance($courseid)); // Course ID is not known at this stage.
         $output = array();
         $output['íd'] = $params['id'];
         $output['templatehtml'] = '<div>test</div>';

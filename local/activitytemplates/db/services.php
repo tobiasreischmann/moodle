@@ -28,7 +28,7 @@ $functions = array(
         'classpath'   => 'local/activitytemplates/externallib.php',
         'description' => 'Service to provide templates for a activity type',
         'type' => 'read', // The value is 'write' if your function does any database change, otherwise it is 'read'.
-//        'capabilities' => 'moodle/course:managegroups', TODO: Is there a moodle/course:addactivity?
+        //'capabilities' => 'moodle/course:manageactivities', TODO: Re-enable as soon as we know a course; or remove completely
         'ajax' => true,
     )
 );
