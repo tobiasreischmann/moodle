@@ -297,6 +297,8 @@ class core_course_renderer extends plugin_renderer_base {
             $module->help = get_string('nohelpforactivityorresource', 'moodle');
         }
 
+        $this->page->requires->js_call_amd('local_activitytemplates/load_templates', 'initialise', array($COURSE->id));
+
         // Format the help text using markdown with the following options
         $options = new stdClass();
         $options->trusted = false;
