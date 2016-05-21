@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Services for the avtivity templates.
+ * Service definition for the activity templates plugin. Mainly used for exposing functions to AJAX.
  *
  * @package local_activitytemplates
  * @category   services

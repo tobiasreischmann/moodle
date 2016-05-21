@@ -13,29 +13,21 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-/**
- * External local_activitytemplates API
- *
- * @package local_activitytemplates
- * @category
- * @copyright 2016 WWU Münster
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 require_once("$CFG->libdir/externallib.php");
 /**
- * local_activitytemplates external functions
+ * External local_activitytemplates API
  *
  * @package    local_activitytemplates
  * @category   external
  * @copyright  2016 WWU Münster
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.9
  */
 class local_activitytemplates_template_provider extends external_api{
     public static function create_output_parameters() {
         return new external_function_parameters(
             array(
-                'id' => new external_value(PARAM_INT, 'id of activitytype'),
+                'id' => new external_value(PARAM_INT, 'ID of activity type'),
                 )
             )
         );
@@ -43,8 +35,8 @@ class local_activitytemplates_template_provider extends external_api{
     public static function create_output_returns() {
         return new external_single_structure(
             array(
-                'id' => new external_value(PARAM_INT, 'id of activitytype'),
-                'templatehtml' => new external_value(PARAM_TEXT, 'html-list of templates'),
+                'id' => new external_value(PARAM_INT, 'ID of activity type'),
+                'templatehtml' => new external_value(PARAM_TEXT, 'HTML list of templates'),
             )
         );
     }
