@@ -41,7 +41,9 @@ define(['jquery','core/ajax'], function($, ajax) {
      */
     return {
         initialise: function(){
-            $('.typesummary').on('click', loadtemplates);
+            $(document).ready(function(){
+                $('form#chooserform .alloptions input[name=jumplink]:radio').on('change', loadtemplates);
+            });
         }
     };
 });

@@ -24,15 +24,14 @@ require_once("$CFG->libdir/externallib.php");
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_activitytemplates_template_provider extends external_api{
-    public static function create_output_parameters() {
+    public static function get_templates_for_activity_parameters() {
         return new external_function_parameters(
             array(
                 'id' => new external_value(PARAM_INT, 'ID of activity type'),
                 )
-            )
-        );
+            );
     }
-    public static function create_output_returns() {
+    public static function get_templates_for_activity_returns() {
         return new external_single_structure(
             array(
                 'id' => new external_value(PARAM_INT, 'ID of activity type'),
@@ -48,7 +47,7 @@ class local_activitytemplates_template_provider extends external_api{
      */
     public static function get_templates_for_activity($activitytype) {
         global $DB, $PAGE, $CFG;
-        $params = self::validate_parameters(self::create_output_parameters(), array('id' => $activitytype));
+        $params = self::validate_parameters(self::get_templates_for_activity_parameters(), array('id' => $activitytype));
         $output = array();
         $output['íd'] = $params['id'];
         $output['templatehtml'] = '<div>test</div>';
