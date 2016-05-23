@@ -64,6 +64,7 @@ $string['databasename'] = 'Database name';
 $string['databasepass'] = 'Database password';
 $string['databaseport'] = 'Database port';
 $string['databasesocket'] = 'Unix socket';
+$string['databasesslmode'] = 'Database sslmode';
 $string['databasetypehead'] = 'Choose database driver';
 $string['databasetypesub'] = 'Moodle supports several types of database servers. Please contact server administrator if you do not know which type to use.';
 $string['databaseuser'] = 'Database user';

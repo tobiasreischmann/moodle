@@ -132,6 +132,7 @@ if (!empty($_POST)) {
     $config->prefix   = trim($_POST['prefix']);
     $config->dbport   = (int)trim($_POST['dbport']);
     $config->dbsocket = trim($_POST['dbsocket']);
+    $config->dbsslmode = trim($_POST['dbsslmode']);
 
     if ($config->dbport <= 0) {
         $config->dbport = '';
@@ -152,6 +153,7 @@ if (!empty($_POST)) {
     $config->prefix   = 'mdl_';
     $config->dbport   = empty($distro->dbport) ? '' : $distro->dbport;
     $config->dbsocket = empty($distro->dbsocket) ? '' : $distro->dbsocket;
+    $config->dbsslmode   = empty($distro->dbsslmode) ? '' : $distro->dbsslmode;
 
     $config->admin    = 'admin';
 
@@ -286,9 +288,16 @@ if ($config->stage == INSTALL_SAVE) {
         $config->stage = INSTALL_DATABASETYPE;
     } else {
         if (function_exists('distro_pre_create_db')) { // Hook for distros needing to do something before DB creation
-            $distro = distro_pre_create_db($database, $config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, $config->prefix, array('dbpersist'=>0, 'dbport'=>$config->dbport, 'dbsocket'=>$config->dbsocket), $distro);
+            $distro = distro_pre_create_db($database, $config->dbhost, $config->dbuser, $config->dbpass,
+                $config->dbname, $config->prefix,
+                array('dbpersist' => 0, 'dbport' => $config->dbport,
+                    'dbsocket' => $config->dbsocket, 'dbsslmode' => $config->dbsslmode),
+                $distro);
         }
-        $hint_database = install_db_validate($database, $config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, $config->prefix, array('dbpersist'=>0, 'dbport'=>$config->dbport, 'dbsocket'=>$config->dbsocket));
+        $hint_database = install_db_validate($database, $config->dbhost, $config->dbuser, $config->dbpass,
+            $config->dbname, $config->prefix,
+            array('dbpersist' => 0, 'dbport' => $config->dbport,
+                'dbsocket' => $config->dbsocket, 'dbsslmode' => $config->dbsslmode));
 
         if ($hint_database === '') {
             $configphp = install_generate_configphp($database, $CFG);
@@ -430,6 +439,7 @@ if ($config->stage == INSTALL_DATABASE) {
     $strprefix   = get_string('dbprefix', 'install');
     $strdbport   = get_string('databaseport', 'install');
     $strdbsocket = get_string('databasesocket', 'install');
+    $strdbsslmode = get_string('databasesslmode', 'install');
 
     echo '<div class="userinput">';
 
@@ -465,6 +475,12 @@ if ($config->stage == INSTALL_DATABASE) {
         echo '<div class="fitemelement"><input id="id_dbsocket" name="dbsocket" type="text" value="'.s($config->dbsocket).'" size="50" /></div>';
         echo '</div>';
     }
+
+    echo '<div class="fitem"><div class="fitemtitle"><label for="id_dbsslmode">'.$strdbsslmode.'</label></div>';
+    echo '<div class="fitemelement">';
+    echo '<input id="id_dbsslmode" name="dbsslmode" type="text" value="'.s($config->dbsslmode).'" size="50" />';
+    echo '</div>';
+    echo '</div>';
 
     if ($hint_database !== '') {
         echo '<div class="alert alert-error">'.$hint_database.'</div>';

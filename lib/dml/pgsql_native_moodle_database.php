@@ -154,6 +154,11 @@ class pgsql_native_moodle_database extends moodle_database {
             $connection = "host='$this->dbhost' $port user='$this->dbuser' password='$pass' dbname='$this->dbname'";
         }
 
+        // Add SSL mode parameter.
+        if (!empty($this->dboptions['dbsslmode'])) {
+            $connection .= " sslmode='".$this->dboptions['dbsslmode']."'";
+        }
+
         ob_start();
         if (empty($this->dboptions['dbpersist'])) {
             $this->pgsql = pg_connect($connection, PGSQL_CONNECT_FORCE_NEW);

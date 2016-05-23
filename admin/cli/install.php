@@ -66,6 +66,7 @@ Options:
 --dbpass=PASSWORD     Database password. Default is blank
 --dbport=NUMBER       Use database port.
 --dbsocket=PATH       Use database socket, 1 means default. Available for some databases only.
+--dbsslmode=STRING    Use database ssl mode. Available for some databases only.
 --prefix=STRING       Table prefix for above database tables. Default is mdl_
 --fullname=STRING     The fullname of the site
 --shortname=STRING    The shortname of the site
@@ -252,6 +253,7 @@ list($options, $unrecognized) = cli_get_params(
         'dbpass'            => '',
         'dbport'            => '',
         'dbsocket'          => '',
+        'dbsslmode'          => '',
         'prefix'            => 'mdl_',
         'fullname'          => '',
         'shortname'         => '',
@@ -593,6 +595,19 @@ if ($CFG->ostype === 'WINDOWS') {
     $CFG->dboptions['dbsocket'] = $options['dbsocket'];
 }
 
+// Ask for db sslmode.
+if ($CFG->dbtype !== 'pgsql') {
+    $CFG->dboptions['dbsslmode'] = '';
+} else if ($interactive) {
+    cli_separator();
+    cli_heading(get_string('databasesslmode', 'install'));
+    $prompt = get_string('clitypevaluedefault', 'admin', $options['dbsslmode']);
+    $CFG->dboptions['dbsslmode'] = cli_input($prompt, $options['dbsslmode']);
+
+} else {
+    $CFG->dboptions['dbsslmode'] = $options['dbsslmode'];
+}
+
 // ask for db user
 if ($interactive) {
     cli_separator();
@@ -621,14 +636,24 @@ if ($interactive) {
 
         $CFG->dbpass = cli_input($prompt, $options['dbpass']);
         if (function_exists('distro_pre_create_db')) { // Hook for distros needing to do something before DB creation
-            $distro = distro_pre_create_db($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname, $CFG->prefix, array('dbpersist'=>0, 'dbport'=>$CFG->dboptions['dbport'], 'dbsocket'=>$CFG->dboptions['dbsocket']), $distro);
+            $distro = distro_pre_create_db($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass,
+                $CFG->dbname, $CFG->prefix,
+                array('dbpersist' => 0, 'dbport' => $CFG->dboptions['dbport'],
+                    'dbsocket' => $CFG->dboptions['dbsocket'], 'dbsslmode' => $CFG->dboptions['dbsslmode']),
+                $distro);
         }
-        $hint_database = install_db_validate($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname, $CFG->prefix, array('dbpersist'=>0, 'dbport'=>$CFG->dboptions['dbport'], 'dbsocket'=>$CFG->dboptions['dbsocket']));
+        $hint_database = install_db_validate($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass,
+            $CFG->dbname, $CFG->prefix,
+            array('dbpersist' => 0, 'dbport' => $CFG->dboptions['dbport'],
+                'dbsocket' => $CFG->dboptions['dbsocket'], 'dbsslmode' => $CFG->dboptions['dbsslmode']));
     } while ($hint_database !== '');
 
 } else {
     $CFG->dbpass = $options['dbpass'];
-    $hint_database = install_db_validate($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname, $CFG->prefix, array('dbpersist'=>0, 'dbport'=>$CFG->dboptions['dbport'], 'dbsocket'=>$CFG->dboptions['dbsocket']));
+    $hint_database = install_db_validate($database, $CFG->dbhost, $CFG->dbuser, $CFG->dbpass,
+        $CFG->dbname, $CFG->prefix,
+        array('dbpersist' => 0, 'dbport' => $CFG->dboptions['dbport'],
+            'dbsocket' => $CFG->dboptions['dbsocket'], 'dbsslmode' => $CFG->dboptions['dbsslmode']));
     if ($hint_database !== '') {
         cli_error(get_string('dbconnectionerror', 'install'));
     }
