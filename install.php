@@ -466,7 +466,7 @@ if ($config->stage == INSTALL_DATABASE) {
     echo '<div class="fitemelement"><input id="id_prefix" name="prefix" type="text" value="'.s($config->prefix).'" size="10" /></div>';
     echo '</div>';
 
-    echo '<div class="fitem"><div class="fitemtitle"><label for="id_prefix">'.$strdbport.'</label></div>';
+    echo '<div class="fitem"><div class="fitemtitle"><label for="id_dbport">'.$strdbport.'</label></div>';
     echo '<div class="fitemelement"><input id="id_dbport" name="dbport" type="text" value="'.s($config->dbport).'" size="10" /></div>';
     echo '</div>';
 
