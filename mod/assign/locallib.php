@@ -3591,6 +3591,14 @@ class assign {
                 return true;
             }
         }
+
+        // If a teacher switched his role she will not be part of $members.
+        // She should however have access to her group's submission.
+        if (is_role_switched($this->course->id) && groups_is_member($groupid, $USER->id) &&
+            has_capability('mod/assign:submit', $this->get_context(), $USER, false)){
+            return true;
+        }
+
         return false;
     }
 
