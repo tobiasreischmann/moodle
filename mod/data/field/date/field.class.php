@@ -190,4 +190,19 @@ class data_field_date extends data_field_base {
         }
         return $configs;
     }
+
+    /**
+     * If checkbox 'humanreadabledate' is checked, then the date value is formated using the userdate function.
+     * @param string $record
+     * @return string date value
+     */
+    public function export_text_value($record) {
+        // Flag specifying if date fields should be exported in human readable format.
+        if (optional_param('humanreadabledate', false, PARAM_BOOL)) {
+            return userdate($record->content, get_string('strftimedate'), 0);
+        }
+        return parent::export_text_value($record);
+    }
+
+
 }
