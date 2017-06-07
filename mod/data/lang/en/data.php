@@ -214,6 +214,7 @@ $string['invalidpreset'] = '{$a} is not a preset.';
 $string['invalidrecord'] = 'Incorrect record';
 $string['invalidurl'] = 'The URL you just entered is not valid';
 $string['jstemplate'] = 'Javascript template';
+$string['humanreadabledate'] = 'Date fields in human-readable format';
 $string['latitude'] = 'Latitude';
 $string['latlong'] = 'Latitude/longitude';
 $string['latlongboth'] = 'Both latitude and longitude are required.';
