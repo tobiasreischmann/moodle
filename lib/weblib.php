@@ -604,15 +604,16 @@ class moodle_url {
      * Returns url without parameters, everything before '?'.
      *
      * @param bool $includeanchor if {@link self::anchor} is defined, should it be returned?
+     * @param bool $includeslasharguments if {@link self::slasharguments} are defined, should they be returned?
      * @return string
      */
-    public function out_omit_querystring($includeanchor = false) {
+    public function out_omit_querystring($includeanchor = false, $includeslasharguments = false) {
 
         $uri = $this->scheme ? $this->scheme.':'.((strtolower($this->scheme) == 'mailto') ? '':'//'): '';
         $uri .= $this->user ? $this->user.($this->pass? ':'.$this->pass:'').'@':'';
         $uri .= $this->host ? $this->host : '';
         $uri .= $this->port ? ':'.$this->port : '';
-        $uri .= $this->path ? $this->path : '';
+        $uri .= $this->get_path($includeslasharguments);
         if ($includeanchor and !is_null($this->anchor)) {
             $uri .= '#' . $this->anchor;
         }
