@@ -1978,9 +1978,11 @@ class core_renderer extends renderer_base {
 
         // now the form itself around it
         if ($button->method === 'get') {
-            $url = $button->url->out_omit_querystring(true); // url without params, the anchor part allowed
+            // Url without params, the anchor part allowed, slasharguments allowed.
+            $url = $button->url->out_omit_querystring(true, true);
         } else {
-            $url = $button->url->out_omit_querystring();     // url without params, the anchor part not allowed
+            // Url without params, the anchor part not allowed, slasharguments allowed.
+            $url = $button->url->out_omit_querystring(false, true);
         }
         if ($url === '') {
             $url = '#'; // there has to be always some action
