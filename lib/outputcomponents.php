@@ -882,7 +882,11 @@ class single_button implements renderable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output) {
-        $url = $this->method === 'get' ? $this->url->out_omit_querystring(true) : $this->url->out_omit_querystring();
+        if ($this->method === 'get') {
+            $url = $this->url->out_omit_querystring(true, true);
+        } else {
+            $url = $this->url->out_omit_querystring(false, true);
+        }
 
         $data = new stdClass();
         $data->id = html_writer::random_id('single_button');
